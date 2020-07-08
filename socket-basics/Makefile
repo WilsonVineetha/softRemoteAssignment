@@ -1,5 +1,3 @@
-
-@@ -0,0 +1,15 @@
 CXX = gcc
 CXXFLAGS = -Wall -g
 
