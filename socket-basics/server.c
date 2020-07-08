@@ -14,7 +14,6 @@
 
 #define DEFAULT_BUFLEN 512
 #define DEFAULT_PORT "27015"
-
 int __cdecl main(void)
 {
     WSADATA wsaData;
