@@ -104,7 +104,7 @@ if __name__ == "__main__":
     DISCONNECT.grid(row=4, column=4)
 
     SETTINGS = Label(gui, text="Settings")
-    SETTINGS.grid(row=6, column=3, ipadx=50)
+    SETTINGS.grid(row=5, column=3, ipadx=50)
 
     L1 = Label(gui, text="Enter the delay")
     L1.grid(row=6, column=3, ipadx=50)
