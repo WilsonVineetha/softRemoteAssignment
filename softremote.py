@@ -7,9 +7,7 @@ from tkinter import *
 
 # globally declare the expression variable
 expression = ""
-client_socket = socket.socket()  # instantiate 
-PORT_NUMBER = 27015
-
+client_socket = socket.socket()  # instantiate
 
 # Function to update expression
 # in the text entry box
@@ -31,7 +29,8 @@ def press(num):
     data = ''
 
 
-def connect(port):
+def connect():
+    port = int(PORT.get())
     host = socket.gethostbyname('localhost')
     client_socket.connect((host, port))  # connect to the server
 
@@ -100,7 +99,7 @@ if __name__ == "__main__":
     # function affiliated to that button is executed .
 
     CONNECT = Button(gui, text=' connect ', fg='black', bg='green',
-                     command=lambda: connect(PORT_NUMBER), height=1, width=7)
+                     command=lambda: connect(), height=1, width=7)
     CONNECT.grid(row=6, column=3)
 
     L1 = Label(gui, text='Host/IP address')
