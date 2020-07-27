@@ -1,33 +1,65 @@
+
 import socket
 import time
 # Python program to  create a simple GUI
 # Using Tkinter
+
 # import everything from tkinter module
-from tkinter import *
+from Tkinter import *
+from timerExt import RepeatedTimer
 
 # globally declare the expression variable
 expression = ""
+#keystate used for state change of key press
+#0 no key press
+#1 key pressed
+key_state = 0
+#socket handler
 client_socket = socket.socket()  # instantiate
+#timer handler
+key_buffer = RepeatedTimer(0,0,"")
+#response time in sec
+response_time = 1
+
+#Function to update buffer
+def push_buffer():
+    # Send data
+    global expression
+    global key_state
+    client_socket.send(expression.encode())
+    data = client_socket.recv(64).decode()
+    expression = ""
+    equation.set("")
+    key_state = 0
+    print('received:' + data)
+    data = ''
 
 # Function to update expression
 # in the text entry box
 def press(num):
     # point out the global expression variable
     global expression
+    global key_state
+    global key_buffer
 
-    # concatenation of string
-    expression = expression + str(num)
-
-    # update the expression by using set method
-    equation.set(expression)
-
-    # Send data
-    client_socket.send(expression.encode())
-
-    data = client_socket.recv(64).decode()
-    print('received:' + data)
-    data = ''
-
+    if key_state:
+        #stop timer 
+        key_buffer.stop()
+        # concatenation of string
+        expression = expression + str(num)
+        # update the expression by using set method
+        equation.set(expression)
+        #start timer
+        key_buffer = RepeatedTimer(response_time, 1, push_buffer)
+        key_state = 1
+    else:
+        # concatenation of string
+        expression = expression + str(num)
+        # update the expression by using set method
+        equation.set(expression)
+        #start timer
+        key_buffer = RepeatedTimer(response_time, 1, push_buffer)
+        key_state = 1
 
 def connect():
     port = int(PORT.get())
@@ -38,23 +70,13 @@ def disconnect():
     print('socket closed')
     client_socket.close()  # close the connection
 
-# Timer function using delay
-def delay():
-    sec = DELAY.get()
-    n = KEY_VALUE.get()
-    p = NUM.get()
-    startTime = time.time()
-    # Converting string to integer
-    x = int(p)
-    if x > 0:
-        for i in range(0, x):
-            press(n)
-            # making delay for 1 second
-            time.sleep(int(sec))
-            endTime = time.time()
-            elapsedTime = endTime - startTime
-            print("Elapsed Time = %s" % elapsedTime)
-
+#Fire the key values continuously
+def fire():
+    delay_sec = int(DELAY.get())
+    key_value = KEY_VALUE.get()
+    total_count = int(NUM.get())
+    #calling repeated timer function
+    rt = RepeatedTimer(delay_sec, total_count, press, key_value)
 
 # Function to clear the contents
 # of text entry box
@@ -66,6 +88,7 @@ def clear():
 
 # Driver code
 if __name__ == "__main__":
+    
     # create a GUI window
     gui = Tk()
 
@@ -91,13 +114,13 @@ if __name__ == "__main__":
     # in table like structure .
     expression_field.pack(side=LEFT)
     expression_field.grid(columnspan=5, ipadx=100)
+
     equation.set('enter your choice')
 
     # create a Buttons and place at a particular
     # location inside the root window .
     # when user press the button, the command or
     # function affiliated to that button is executed .
-
     CONNECT = Button(gui, text=' connect ', fg='black', bg='green',
                      command=lambda: connect(), height=1, width=7)
     CONNECT.grid(row=6, column=3)
@@ -135,7 +158,7 @@ if __name__ == "__main__":
     NUM.grid(row=10, column=4)
 
     FIRE = Button(gui, text=' Fire ', fg='black', bg='green',
-                  command=lambda: delay(), height=2, width=7)
+                  command=lambda: fire(), height=2, width=7)
 
     FIRE.grid(row=11, column=3)
 
@@ -247,6 +270,7 @@ if __name__ == "__main__":
                    command=lambda: press(142), height=1, width=7)
     POWER.grid(row=2, column=2)
 
+
     FAV = Button(gui, text=' FAV ', fg='black', bg='red',
                  command=lambda: press(49), height=1, width=7)
     FAV.grid(row=17, column=2)
@@ -257,3 +281,4 @@ if __name__ == "__main__":
 
     # start the GUI
     gui.mainloop()
+
