@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Softremote>
+  <RemoteCompany>FALCON</RemoteCompany>
+  <RemoteType>UNIVERSAL</RemoteType>
+  <FALCON>
+    <BUTTONS>
+      <KEY1>1</KEY1>
+      <KEY2 >1</KEY2>
+      <POWER>ON</POWER>
+    </BUTTONS>
+  </FALCON>
+</Softremote>
