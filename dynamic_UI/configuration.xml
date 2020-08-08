@@ -12,7 +12,7 @@
       <KEY3>3</KEY3>
       <KEY4>4</KEY4>
       <KEY5>5</KEY5>
-      <KEY6>6</KEY6Y>
+      <KEY6>6</KEY6>
       <KEY7>7</KEY7>
       <KEY8>8</KEY8>
       <KEY9>9</KEY9>
@@ -25,7 +25,7 @@
       <RETURN>1</RETURN>
       <INFO>115</INFO>
       <NAV_RIGHT>106</NAV_RIGHT>
-      <NEV_LEFT>105</NAV_LEFT>
+      <NAV_LEFT>105</NAV_LEFT>
       <NAV_UP>103</NAV_UP>
       <NAV_DOWN>108</NAV_DOWN>
       <FAST_FORWARD>208</FAST_FORWARD>
