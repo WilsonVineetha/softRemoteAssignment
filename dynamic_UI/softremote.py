@@ -321,12 +321,12 @@ class Application (Frame):
 
         L1 = Label(self, text='Host/IP address')
         L1.grid(row=4, column=3, ipadx=10)
-        IP_address = Entry(self, bd=5, testvariable=self.IP_address)
+        IP_address = Entry(self, bd=5, textvariable=self.IP_address)
         IP_address.grid(row=4, column=4)
 
         L2 = Label(self, text='Port number')
         L2.grid(row=5, column=3, ipadx=10)
-        Port_Number = Entry(self, bd=5, testvariable=self.Port_Number)
+        Port_Number = Entry(self, bd=5, textvariable=self.Port_Number)
         Port_Number.grid(row=5, column=4)
 
         DISCONNECT = Button(self, text=' disconnect ', fg='black', bg='green',
@@ -338,17 +338,17 @@ class Application (Frame):
 
         L3 = Label(self, text='Delay')
         L3.grid(row=8, column=3, ipadx=10)
-        DELAY = Entry(self, bd=5, testvariable=self.DELAY)
+        DELAY = Entry(self, bd=5, textvariable=self.DELAY)
         DELAY.grid(row=8, column=4)
 
         L4 = Label(self, text='Key')
         L4.grid(row=9, column=3, ipadx=10)
-        KEY_VALUE = Entry(self, bd=5, testvariable=self.KEY_VALUE)
+        KEY_VALUE = Entry(self, bd=5, textvariable=self.KEY_VALUE)
         KEY_VALUE.grid(row=9, column=4)
 
         L5 = Label(self, text='Number of Times')
         L5.grid(row=10, column=3, ipadx=10)
-        NUM = Entry(self, bd=5, testvariable=self.NUM)
+        NUM = Entry(self, bd=5, textvariable=self.NUM)
         NUM.grid(row=10, column=4)
 
         FIRE = Button(self, text=' Fire ', fg='black', bg='green',
@@ -469,7 +469,7 @@ class Application (Frame):
         FAV.grid(row=17, column=2)
 
         clear = Button(self, text='Clear', fg='black', bg='red',
-                       command=self.clear(), height=1, width=7)
+                       command=lambda: self.clear, height=1, width=7)
         clear.grid(row=18, column='2')
 
     def onOK(self):
@@ -535,7 +535,7 @@ def main():
    root = Tk()
 
    # set size of frame
-   root.geometry ("410x160+300+300")
+   root.geometry ("500x500+300+300")
 
    # call object
    app = Application (root)
