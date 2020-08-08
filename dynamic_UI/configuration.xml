@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Softremote>
+  <IP_address>DEFAULT</IP_address>
+  <Port_Number>DEFAULT</Port_Number>
+  <Remote>
+    <Service>
+      <DELAY>2</DELAY>
+      <KEY_VALUE>3</KEY_VALUE>
+      <NUM>10</NUM>
+      <KEY1>1</KEY1>
+      <KEY2>2</KEY2>
+      <KEY3>3</KEY3>
+      <KEY4>4</KEY4>
+      <KEY5>5</KEY5>
+      <KEY6>6</KEY6Y>
+      <KEY7>7</KEY7>
+      <KEY8>8</KEY8>
+      <KEY9>9</KEY9>
+      <KEY0>0</KEY0>
+      <VOLUP>13</VOLUP>
+      <VOLDOWN>12</VOLDOWN>
+      <CHNLUP>104</CHNLUP>
+      <CHNLDOWN>109</CHNLDOWN>
+      <MENU>102</MENU>
+      <RETURN>1</RETURN>
+      <INFO>115</INFO>
+      <NAV_RIGHT>106</NAV_RIGHT>
+      <NEV_LEFT>105</NAV_LEFT>
+      <NAV_UP>103</NAV_UP>
+      <NAV_DOWN>108</NAV_DOWN>
+      <FAST_FORWARD>208</FAST_FORWARD>
+      <REWIND>168</REWIND>
+      <PLAY_PAUSE>57</PLAY_PAUSE>
+      <POWER>142</POWER>
+      <FAV>49</FAV>
+    </Service>
+  </Remote>
+</Softremote>
