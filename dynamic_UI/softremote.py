@@ -79,8 +79,7 @@ class Application(Frame):
         client_socket.send(expression.encode())
         data = client_socket.recv(64).decode()
         expression = ""
-        equation = StringVar()
-        equation.set("")
+        self.equation.set("")
         key_state = 0
         print('received:' + data)
         data = ''
@@ -100,8 +99,7 @@ class Application(Frame):
             # concatenation of string
             expression = expression + str(num)
             # update the expression by using set method
-            equation = StringVar()
-            equation.set(expression)
+            self.equation.set(expression)
             # start timer
             key_buffer = RepeatedTimer(response_time, 1, self.push_buffer())
             key_state = 1
@@ -109,8 +107,7 @@ class Application(Frame):
             # concatenation of string
             expression = expression + str(num)
             # update the expression by using set method
-            equation = StringVar()
-            equation.set(expression)
+            self.equation.set(expression)
             # start timer
             key_buffer = RepeatedTimer(response_time, 1, self.push_buffer())
             key_state = 1
@@ -130,7 +127,7 @@ class Application(Frame):
         key_value = self.KEY_VALUE.get()
         total_count = int(self.NUM.get())
         # calling repeated timer function
-        rt = RepeatedTimer(delay_sec, total_count, self.press(num), key_value)
+        rt = RepeatedTimer(delay_sec, total_count, self.press, key_value)
 
         # Function to clear the contents
         # of text entry box
@@ -138,8 +135,7 @@ class Application(Frame):
     def clear(self):
         global expression
         expression = ""
-        equation = StringVar()
-        equation.set("")
+        self.equation.set("")
 
     def __init__(self, parent):
         # initialize frame
@@ -169,119 +165,119 @@ class Application(Frame):
         self.xmlService = getElement(self.xmlRemote, "Service")
 
         # get value of "DELAY" element
-        self.DELAY = IntVar()
-        self.DELAY.set(getElementValue(self.xmlService, 1))
+        self.DELAY = StringVar()
+        self.DELAY.set(getElementValue(self.xmlDocument, 1))
 
         # get value of "KEY_VALUE" element
-        self.KEY_VALUE = IntVar()
-        self.KEY_VALUE.set(getElementValue(self.xmlService, 2))
+        self.KEY_VALUE = StringVar()
+        self.KEY_VALUE.set(getElementValue(self.xmlDocument, 2))
 
         # get value of "NUM" element
-        self.NUM = IntVar()
-        self.NUM.set(getElementValue(self.xmlService, 10))
+        self.NUM = StringVar()
+        self.NUM.set(getElementValue(self.xmlDocument, 10))
 
         # get value of "KEY1" element
-        self.KEY1 = IntVar()
+        self.KEY1 = StringVar()
         self.KEY1.set(getElementValue(self.xmlService, 1))
 
         # get value of "KEY2" element
-        self.KEY2 = IntVar()
+        self.KEY2 = StringVar()
         self.KEY2.set(getElementValue(self.xmlService, 2))
 
         # get value of "KEY3" element
-        self.KEY3 = IntVar()
+        self.KEY3 = StringVar()
         self.KEY3.set(getElementValue(self.xmlService, 3))
 
         # get value of "KEY4" element
-        self.KEY4 = IntVar()
+        self.KEY4 = StringVar()
         self.KEY4.set(getElementValue(self.xmlService, 4))
 
         # get value of "KEY5" element
-        self.KEY5 = IntVar()
+        self.KEY5 = StringVar()
         self.KEY5.set(getElementValue(self.xmlService, 5))
 
         # get value of "KEY6" element
-        self.KEY6 = IntVar()
+        self.KEY6 = StringVar()
         self.KEY6.set(getElementValue(self.xmlService, 6))
 
         # get value of "KEY7" element
-        self.KEY7 = IntVar()
+        self.KEY7 = StringVar()
         self.KEY7.set(getElementValue(self.xmlService, 7))
 
         # get value of "KEY8" element
-        self.KEY8 = IntVar()
+        self.KEY8 = StringVar()
         self.KEY8.set(getElementValue(self.xmlService, 8))
 
         # get value of "KEY9" element
-        self.KEY9 = IntVar()
+        self.KEY9 = StringVar()
         self.KEY9.set(getElementValue(self.xmlService, 9))
 
         # get value of "KEY0" element
-        self.KEY0 = IntVar()
+        self.KEY0 = StringVar()
         self.KEY0.set(getElementValue(self.xmlService, 0))
 
         # get value of "VOLUP" element
-        self.VOLUP = IntVar()
+        self.VOLUP = StringVar()
         self.VOLUP.set(getElementValue(self.xmlService, 11))
 
         # get value of "VOLDOWN" element
-        self.VOLDOWN = IntVar()
+        self.VOLDOWN = StringVar()
         self.VOLDOWN.set(getElementValue(self.xmlService, 12))
 
         # get value of "CHNLUP" element
-        self.CHNLUP = IntVar()
+        self.CHNLUP = StringVar()
         self.CHNLUP.set(getElementValue(self.xmlService, 13))
 
         # get value of "CHNLDOWN" element
-        self.CHNLDOWN = IntVar()
+        self.CHNLDOWN = StringVar()
         self.CHNLDOWN.set(getElementValue(self.xmlService, 14))
 
         # get value of "MENU" element
-        self.MENU = IntVar()
+        self.MENU = StringVar()
         self.MENU.set(getElementValue(self.xmlService, 15))
 
         # get value of "RETURN" element
-        self.RETURN = IntVar()
+        self.RETURN = StringVar()
         self.RETURN.set(getElementValue(self.xmlService, 16))
 
         # get value of "INFO" element
-        self.INFO = IntVar()
+        self.INFO = StringVar()
         self.INFO.set(getElementValue(self.xmlService, 17))
 
         # get value of "NAV_RIGHT" element
-        self.NAV_RIGHT = IntVar()
+        self.NAV_RIGHT = StringVar()
         self.NAV_RIGHT.set(getElementValue(self.xmlService, 18))
 
         # get value of "NEV_LEFT" element
-        self.NEV_LEFT = IntVar()
+        self.NEV_LEFT = StringVar()
         self.NEV_LEFT.set(getElementValue(self.xmlService, 19))
 
         # get value of "NAV_UP" element
-        self.NAV_UP = IntVar()
+        self.NAV_UP = StringVar()
         self.NAV_UP.set(getElementValue(self.xmlService, 20))
 
         # get value of "NAV_DOWN" element
-        self.NAV_DOWN = IntVar()
+        self.NAV_DOWN = StringVar()
         self.NAV_DOWN.set(getElementValue(self.xmlService, 21))
 
         # get value of "FAST_FORWARD" element
-        self.FAST_FORWARD = IntVar()
+        self.FAST_FORWARD = StringVar()
         self.FAST_FORWARD.set(getElementValue(self.xmlService, 22))
 
         # get value of "REWIND" element
-        self.REWIND = IntVar()
+        self.REWIND = StringVar()
         self.REWIND.set(getElementValue(self.xmlService, 23))
 
         # get value of "PLAY_PAUSE" element
-        self.PLAY_PAUSE = IntVar()
+        self.PLAY_PAUSE = StringVar()
         self.PLAY_PAUSE.set(getElementValue(self.xmlService, 24))
 
         # get value of "POWER" element
-        self.POWER = IntVar()
+        self.POWER = StringVar()
         self.POWER.set(getElementValue(self.xmlService, 25))
 
         # get value of "FAV" element
-        self.FAV = IntVar()
+        self.FAV = StringVar()
         self.FAV.set(getElementValue(self.xmlService, 26))
 
         # initialize UI
