@@ -254,6 +254,14 @@ class Application(Frame):
         # get value of "FAV" element
         self.FAV = getElementValue(self.xmlService, "FAV")
 
+        
+        # get value of "FAV" element
+        self.NETFLIX = getElementValue(self.xmlService, "NETFLIX")
+
+        
+        # get value of "FAV" element
+        self.AMAZON = getElementValue(self.xmlService, "AMAZON")
+
         # initialize UI
         self.initUI()
 
@@ -483,6 +491,14 @@ class Application(Frame):
         clear = Button(self, text='Clear', fg='black', bg='red',
                        command=lambda: self.clear(), height=1, width=7)
         clear.grid(row=18, column=2, sticky=E)
+
+        NETFLIX = Button(self, text=' NETFLIX ', fg='black', bg='red',
+                     command=lambda: self.press(self.NETFLIX), height=1, width=7)
+        NETFLIX.grid(row=19, column=2, sticky=E)
+
+        AMAZON = Button(self, text='AMAZON', fg='black', bg='red',
+                       command=lambda: self.press(self.AMAZON), height=1, width=7)
+        AMAZON.grid(row=19, column=1, sticky=E)
 
     def onOK(self):
         # set values in xml document
