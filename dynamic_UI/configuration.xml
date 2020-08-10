@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Softremote>
-  <IP_address>DEFAULT</IP_address>
-  <Port_Number>DEFAULT</Port_Number>
+  <IP_address>106.51.190.255</IP_address>
+  <Port_Number>27150</Port_Number>
   <Remote>
     <Service>
-      <DELAY>2</DELAY>
-      <KEY_VALUE>3</KEY_VALUE>
-      <NUM>10</NUM>
+      <DELAY>1</DELAY>
+      <KEY_VALUE>2</KEY_VALUE>
+      <NUM>5</NUM>
       <KEY1>1</KEY1>
       <KEY2>2</KEY2>
       <KEY3>3</KEY3>
@@ -14,25 +14,27 @@
       <KEY5>5</KEY5>
       <KEY6>6</KEY6>
       <KEY7>7</KEY7>
-      <KEY8>8</KEY8>
-      <KEY9>9</KEY9>
-      <KEY0>0</KEY0>
+      <KEY8>6</KEY8>
+      <KEY9>7</KEY9>
+      <KEY0>8</KEY0>
       <VOLUP>13</VOLUP>
       <VOLDOWN>12</VOLDOWN>
-      <CHNLUP>104</CHNLUP>
+      <CHNLUP>14</CHNLUP>
       <CHNLDOWN>109</CHNLDOWN>
-      <MENU>102</MENU>
-      <RETURN>1</RETURN>
+      <MENU>111</MENU>
+      <RETURN>16</RETURN>
       <INFO>115</INFO>
       <NAV_RIGHT>106</NAV_RIGHT>
       <NAV_LEFT>105</NAV_LEFT>
-      <NAV_UP>103</NAV_UP>
-      <NAV_DOWN>108</NAV_DOWN>
-      <FAST_FORWARD>208</FAST_FORWARD>
+      <NAV_UP>110</NAV_UP>
+      <NAV_DOWN>13</NAV_DOWN>
+      <FAST_FORWARD>111</FAST_FORWARD>
       <REWIND>168</REWIND>
       <PLAY_PAUSE>57</PLAY_PAUSE>
-      <POWER>142</POWER>
-      <FAV>49</FAV>
+      <POWER>222</POWER>
+      <FAV>333</FAV>
+      <NETFLIX>112</NETFLIX>
+      <AMAZON>113</AMAZON>
     </Service>
   </Remote>
 </Softremote>
