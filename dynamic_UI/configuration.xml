@@ -14,12 +14,12 @@
       <KEY5>5</KEY5>
       <KEY6>6</KEY6>
       <KEY7>7</KEY7>
-      <KEY8>6</KEY8>
-      <KEY9>7</KEY9>
-      <KEY0>8</KEY0>
-      <VOLUP>13</VOLUP>
+      <KEY8>8</KEY8>
+      <KEY9>9</KEY9>
+      <KEY0>0</KEY0>
+      <VOLUP>11</VOLUP>
       <VOLDOWN>12</VOLDOWN>
-      <CHNLUP>14</CHNLUP>
+      <CHNLUP>13</CHNLUP>
       <CHNLDOWN>109</CHNLDOWN>
       <MENU>111</MENU>
       <RETURN>16</RETURN>
@@ -31,6 +31,7 @@
       <FAST_FORWARD>111</FAST_FORWARD>
       <REWIND>168</REWIND>
       <PLAY_PAUSE>57</PLAY_PAUSE>
+      <VOLMUTE>5</VOLMUTE>
       <POWER>222</POWER>
       <FAV>333</FAV>
       <NETFLIX>112</NETFLIX>
