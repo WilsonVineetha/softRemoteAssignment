@@ -46,6 +46,17 @@ def getElementValue(parent, name):
                         return child.nodeValue
     return None
 
+# set value of an XML element with specified name
+def setElementValue(parent, name, value):
+    if parent.childNodes:
+        for node in parent.childNodes:
+            if node.nodeType == node.ELEMENT_NODE:
+                if node.tagName == name:
+                    if node.hasChildNodes:
+                        child = node.firstChild
+                        child.nodeValue = value
+    return None
+
 # globally declare the expression variable
 expression = ""
 # keystate used for state change of key press
@@ -58,31 +69,33 @@ key_buffer = RepeatedTimer(0, 0, "")
 response_time = 1
 # socket handler
 client_socket = socket.socket()  # instantiate
-# set value of an XML element with specified name
-def setElementValue(parent, name, value):
-    if parent.childNodes:
-        for node in parent.childNodes:
-            if node.nodeType == node.ELEMENT_NODE:
-                if node.tagName == name:
-                    if node.hasChildNodes:
-                        child = node.firstChild
-                        child.nodeValue = value
-    return None
-
-
+client_socket1 = socket.socket()  # instantiate
+TCP = int
+UDP = int
 class Application(Frame):
     # Function to update buffer
     def push_buffer(self):
-        # Send data
+        port = int(self.Port_Number.get())
         global expression
         global key_state
-        client_socket.send(expression.encode())
-        data = client_socket.recv(64).decode()
-        expression = ""
-        self.equation.set("")
-        key_state = 0
-        print('received:' + data)
-        data = ''
+        # Send data using TCP socket
+        if(self.TCP==1):
+            client_socket.send(expression.encode())
+            data = client_socket.recv(64).decode()
+            print('received:' + data)
+            expression = ""
+            self.equation.set("")
+            key_state = 0
+        if(self.UDP==0):
+            # Send data using UDP socket
+            client_socket1.sendto(expression.encode("utf-8"), ("self.IP_address", port))
+            data1, addr = client_socket1.recvfrom(port)
+            print('received:' + str(data1))
+            expression = ""
+            self.equation.set("")
+            key_state = 0
+
+
 
     # Function to update expression
     # in the text entry box
@@ -112,7 +125,17 @@ class Application(Frame):
             key_buffer = RepeatedTimer(response_time, 1, self.push_buffer())
             key_state = 1
 
-    def connect(self):
+    def connect_UDP(self):
+        self.UDP = 0
+        self.TCP = 0
+        client_socket1 = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        port = int(self.Port_Number.get())
+        host = socket.gethostbyname('localhost')
+        client_socket1.connect((host, port))  # connect to the server
+
+    def connect_TCP(self):
+        self.TCP = 1
+        self.UDP = 1
         port = int(self.Port_Number.get())
         host = socket.gethostbyname('localhost')
         client_socket.connect((host, port))  # connect to the server
@@ -210,7 +233,7 @@ class Application(Frame):
         self.VOLUP = getElementValue(self.xmlService, "VOLUP")
 
         # get value of "VOLDOWN" element
-        self.VOLDOWN =getElementValue(self.xmlService, "VOLDOWN")
+        self.VOLDOWN = getElementValue(self.xmlService, "VOLDOWN")
 
         # get value of "CHNLUP" element
         self.CHNLUP = getElementValue(self.xmlService, "CHNLUP")
@@ -231,7 +254,7 @@ class Application(Frame):
         self.NAV_RIGHT = getElementValue(self.xmlService, "NAV_RIGHT")
 
         # get value of "NEV_LEFT" element
-        self.NEV_LEFT = getElementValue(self.xmlService, "NEV_LEFT")
+        self.NAV_LEFT = getElementValue(self.xmlService, "NAV_LEFT")
 
         # get value of "NAV_UP" element
         self.NAV_UP = getElementValue(self.xmlService, "NAV_UP")
@@ -248,17 +271,18 @@ class Application(Frame):
         # get value of "PLAY_PAUSE" element
         self.PLAY_PAUSE = getElementValue(self.xmlService, "PLAY_PAUSE")
 
+        # get value of "VOL_MUTE" element
+        self.VOLMUTE = getElementValue(self.xmlService, "VOLMUTE")
+
         # get value of "POWER" element
         self.POWER = getElementValue(self.xmlService, "POWER")
 
         # get value of "FAV" element
         self.FAV = getElementValue(self.xmlService, "FAV")
 
-        
         # get value of "FAV" element
         self.NETFLIX = getElementValue(self.xmlService, "NETFLIX")
 
-        
         # get value of "FAV" element
         self.AMAZON = getElementValue(self.xmlService, "AMAZON")
 
@@ -335,9 +359,13 @@ class Application(Frame):
         # location inside the root window .
         # when user press the button, the command or
         # function affiliated to that button is executed .
-        CONNECT = Button(self, text=' connect ', fg='black', bg='green',
-                         command=lambda: self.connect(), height=1, width=7)
-        CONNECT.grid(row=6, column=3, sticky=E)
+        CONNECT_TCP = Button(self, text=' connect_TCP ', fg='black', bg='green',
+                         command=lambda: self.connect_TCP(), height=1, width=7)
+        CONNECT_TCP.grid(row=6, column=3, sticky=E)
+
+        CONNECT_UDP = Button(self, text=' connect_UDP ', fg='black', bg='green',
+                         command=lambda: self.connect_UDP(), height=1, width=7)
+        CONNECT_UDP.grid(row=6, column=4, sticky=E)
 
         L1 = Label(self, text='IP address')
         L1.grid(row=4, column=3, ipadx=10, sticky=W)
@@ -351,23 +379,23 @@ class Application(Frame):
 
         DISCONNECT = Button(self, text=' disconnect ', fg='black', bg='green',
                             command=lambda: self.disconnect(), height=1, width=7)
-        DISCONNECT.grid(row=6, column=4, sticky=E)
+        DISCONNECT.grid(row=6, column=5, sticky=E)
 
         SETTINGS = Label(self, text=' Settings ', fg='white', bg='black')
         SETTINGS.grid(row=7, column=3, ipadx=10)
 
         L3 = Label(self, text='Delay')
-        L3.grid(row=8, column=3, ipadx=10, sticky=E+W)
+        L3.grid(row=8, column=3, ipadx=10, sticky=E + W)
         DELAY = Entry(self, bd=5, textvariable=self.DELAY)
         DELAY.grid(row=8, column=4)
 
         L4 = Label(self, text='Key')
-        L4.grid(row=9, column=3, ipadx=10, sticky=E+W)
+        L4.grid(row=9, column=3, ipadx=10, sticky=E + W)
         KEY_VALUE = Entry(self, bd=5, textvariable=self.KEY_VALUE)
         KEY_VALUE.grid(row=9, column=4)
 
         L5 = Label(self, text='Number of Times')
-        L5.grid(row=10, column=3, ipadx=10, sticky=E+W)
+        L5.grid(row=10, column=3, ipadx=10, sticky=E + W)
         NUM = Entry(self, bd=5, textvariable=self.NUM)
         NUM.grid(row=10, column=4)
 
@@ -493,11 +521,11 @@ class Application(Frame):
         clear.grid(row=18, column=2, sticky=E)
 
         NETFLIX = Button(self, text=' NETFLIX ', fg='black', bg='red',
-                     command=lambda: self.press(self.NETFLIX), height=1, width=7)
+                         command=lambda: self.press(self.NETFLIX), height=1, width=7)
         NETFLIX.grid(row=19, column=2, sticky=E)
 
         AMAZON = Button(self, text='AMAZON', fg='black', bg='red',
-                       command=lambda: self.press(self.AMAZON), height=1, width=7)
+                        command=lambda: self.press(self.AMAZON), height=1, width=7)
         AMAZON.grid(row=19, column=1, sticky=E)
 
     def onOK(self):
@@ -548,6 +576,3 @@ def main():
 # if this is the main thread then call main() function
 if __name__ == '__main__':
     main()
-
-
-
